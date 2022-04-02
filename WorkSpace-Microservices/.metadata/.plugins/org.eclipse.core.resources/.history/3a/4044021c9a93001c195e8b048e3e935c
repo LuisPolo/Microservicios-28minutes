@@ -1,0 +1,5 @@
+package pe.com.techniser.microservices.apigateway;
+
+public class ApiGatewayConfiguration {
+
+}

@@ -1,0 +1,14 @@
+package pe.com.techniser.microservices.limitsservice.controller;
+
+public class LimitsController {
+
+	public LimitsController() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

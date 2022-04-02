@@ -1,0 +1,9 @@
+FROM 19-jdk-alpine3.15
+RUN apk --update add fontconfig ttf-dejavu
+RUN apk --no-cache add msttcorefonts-installer fontconfig && \
+  update-ms-fonts && \
+  fc-cache -f
+ADD target/currency-exchange-service.jar currency-exchange-service.jar
+EXPOSE 8000
+#ENTRYPOINT [ "java", "-jar", "currency-exchange-service.jar"]
+CMD ["java", "-jar", "currency-exchange-service.jar"]

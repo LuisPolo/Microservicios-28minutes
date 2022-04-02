@@ -1,0 +1,30 @@
+package pe.com.techniser.microservices.limitsservice.controller;
+
+public class Limits {
+	
+	private int minimunl;
+	private int maximum;
+	
+	public Limits() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Limits(int minimunl, int maximum) {
+		super();
+		this.minimunl = minimunl;
+		this.maximum = maximum;
+	}
+	public int getMinimunl() {
+		return minimunl;
+	}
+	public void setMinimunl(int minimunl) {
+		this.minimunl = minimunl;
+	}
+	public int getMaximum() {
+		return maximum;
+	}
+	public void setMaximum(int maximum) {
+		this.maximum = maximum;
+	}
+
+}
