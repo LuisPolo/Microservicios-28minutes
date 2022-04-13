@@ -1,9 +1,0 @@
-FROM openjdk:latest
-ADD target/currency-exchange-service.jar currency-exchange-service.jar
-RUN apk --update add fontconfig ttf-dejavu
-RUN apk --no-cache add msttcorefonts-installer fontconfig && \
-  update-ms-fonts && \
-  fc-cache -f
-COPY . /usr/src/myapp
-WORKDIR /usr/src/myapp
-CMD ["java", "Main"]

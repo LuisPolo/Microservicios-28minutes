@@ -1,5 +1,0 @@
-package pe.com.techniser.microservices.limitsservice.controller;
-
-public class Limits {
-
-}

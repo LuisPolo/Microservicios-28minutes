@@ -1,10 +1,76 @@
---- 
-services: 
-  db: 
-    container_name: mysql
-    environment: 
-      - MYSQL_ROOT_PASSWORD=12345678
-    image: "mysql:5.7"
-    ports: 
-      - "3306:3306"
-version: "3"
+version: '3.8'
+
+services:
+  api-gateway:
+    #container_name: currency-exchange-service   
+    build:
+      context: ./Docker-api-gateway 
+    image: api-gateway:1.0.0
+    ports:
+      - "8765:8765"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    depends_on: 
+      - naming-server
+      - currency-exchange-service
+      - currency-conversion-service
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka        
+    networks:
+      - currency-network 
+
+  currency-conversion-service:
+    #container_name: currency-exchange-service   
+    build:
+      context: ./Docker-currency-conversion-service  
+    image: currency-conversion-service:1.0.0
+    ports:
+      - "8100:8100"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    depends_on: 
+      - naming-server
+      - currency-exchange-service
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka        
+    networks:
+      - currency-network 
+      
+  currency-exchange-service:
+    #container_name: currency-exchange-service   
+    build:
+      context: ./Docker-currency-exchange-service  
+    image: currency-exchange-service:1.0.0
+    ports:
+      - "8000:8000"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    depends_on: 
+      - naming-server
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka        
+    networks:
+      - currency-network 
+
+  naming-server:  
+    #container_name: naming-server
+    build:
+      context: ./Docker-naming-server
+    image: naming-server:1.0.0
+    ports:
+      - "8761:8761" 
+    deploy:
+      resources:
+        limits:
+          memory: 700m  
+    networks:
+      - currency-network 
+            
+networks:
+  currency-network:
